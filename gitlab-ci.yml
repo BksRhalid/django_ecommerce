@@ -1,0 +1,37 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  COMMIT_SHA: $CI_COMMIT_SHORT_SHA
+  COMMIT_BRANCH: $CI_COMMIT_REF_SLUG
+
+build web app:
+  stage: build
+  image: node:alpine
+  script:
+    - apk add --no-cache python make g++
+    - yarn install
+    - yarn build
+  only:
+    - master
+  artifacts:
+    paths:
+      - dist/
+
+upload web app:
+  stage: deploy
+  image: alpine
+  dependencies:
+    - build web app
+  variables:
+    GIT_STRATEGY: none
+  before_script:
+    - apk add lftp
+  script:
+    - lftp -e "mirror -R dist www" -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST
+  only:
+    refs:
+      - master
+      # - develop
