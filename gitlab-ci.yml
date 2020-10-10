@@ -12,8 +12,9 @@ build web app:
   image: node:alpine
   script:
     - apk add --no-cache python make g++
-    - yarn install
-    - yarn build
+    - pip install -r requirements.txt
+    - docker-compose build
+    - docker-compose up -d
   only:
     - master
   artifacts:
