@@ -134,7 +134,7 @@ staging:
       - apt-get install -y lftp
     script:
       # - lftp -e "mirror -R dist www" -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST
-      - lftp -e "open $FTP_HOST; user $FTP_USERNAME $FTP_PASSWORD; mirror -X .* -X .*/ --reverse --verbose --delete / www/; bye"
+      - lftp -e "open $FTP_HOST; user $FTP_USERNAME $FTP_PASSWORD; mirror -X .* -X .*/ --reverse --verbose --delete Soldorak/ www/; bye"
     only:
       refs:
         - master
