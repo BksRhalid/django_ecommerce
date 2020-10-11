@@ -130,7 +130,7 @@ test:
 staging:
     stage: deploy
     before_script:
-      - apk add lftp
+      - pip install lftp
     script:
       - lftp -e "mirror -R dist www" -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST
     only:
