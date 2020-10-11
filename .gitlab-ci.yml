@@ -130,7 +130,8 @@ test:
 staging:
     stage: deploy
     before_script:
-      - pip install lftp
+      - apt-get update -qy
+      - apt-get install -y lftp
     script:
       - lftp -e "mirror -R dist www" -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST
     only:
