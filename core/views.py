@@ -295,6 +295,11 @@ class PaymentView(View):
                 order.ordered = True
                 order.payment = payment
                 order.ref_code = create_ref_code()
+
+                # assign the points to the order
+                order.points_used = order.get_total_points()
+                userprofile.current_wallet = userprofile.wallet - order.points_used
+                userprofile.save()
                 order.save()
 
                 messages.success(self.request, "Your order was successful!")
