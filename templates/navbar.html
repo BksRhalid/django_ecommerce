@@ -120,19 +120,36 @@
               <a href="/" class="logo">
                 <img src="{% static 'img/base/red_logo_VL.png' %}" alt="">
               </a>
+              <p style="color:black">Mon compte : {{request.user.userprofile.wallet}}</p>
             </div>
           </div>
           <!-- /LOGO -->
+          {% if request.user.is_authenticated %}
           <!-- SEARCH BAR -->
           <!-- Bouton pré-inscription -->
           <div class="col-md-3 text-center">
-            <!-- <a href="https://soldorak.typeform.com/to/qDZpyX" class="btn btn-primary mr-2 mb-2">Pré-inscription</a> -->
+            <!-- <h5>
+              <strong>
+                <a href="/" class="dark-grey-text">valeur
+                  <span class="badge badge-pill primary-color">{{ request.user.user_profile.current_wallet }}</span>
+                </a>
+              </strong>
+            </h5> -->
           </div>
           <!-- /SEARCH BAR -->
           <!-- ACCOUNT -->
           <div class="col-md-6 clearfix">
             <div class="header-ctn">
-              {% if request.user.is_authenticated %}
+              <!-- Wishlist -->
+              <div>
+                <a href="{% url 'core:order-summary' %}" style="color:black">
+                  <span>Vos crédits</span>
+                  <div class="badge badge-pill primary-color">{{ request.user.userprofile.current_wallet }}
+                    <img src="{% static 'img/base/flaticon_soldorak.ico' %}" alt="">
+                  </div>
+                </a>
+              </div>
+              <!-- /Wishlist -->
               <!-- Wishlist -->
               <div>
                 <a href="{% url 'core:order-summary' %}" style="color:black">
@@ -159,42 +176,51 @@
               </div>
               <!-- /ACCOUNT -->
               {% else %}
-              <!-- Se connecter -->
-              <div>
-                <a href="{% url 'account_login' %}" style="color:black">
-                  <i class="fas fa-sign-in-alt"></i>
-                  <span>se connecter</span>
-                </a>
+              <!-- SEARCH BAR -->
+              <!-- Bouton pré-inscription -->
+              <div class="col-md-3 text-center">
+                <!-- <a href="https://soldorak.typeform.com/to/qDZpyX" class="btn btn-primary mr-2 mb-2">Pré-inscription</a> -->
               </div>
-              <!-- /se connecter -->
-              <!-- Se connecter -->
-              <div>
-                <a href="{% url 'account_signup' %}" style="color:black">
-                  <i class="fas fa-user-plus"></i>
-                  <span>s'inscrire</span>
-                </a>
+              <!-- /SEARCH BAR -->
+              <!-- ACCOUNT -->
+              <div class="col-md-6 clearfix">
+                <div class="header-ctn">
+                  <!-- Se connecter -->
+                  <div>
+                    <a href="{% url 'account_login' %}" style="color:black">
+                      <i class="fas fa-sign-in-alt"></i>
+                      <span>se connecter</span>
+                    </a>
+                  </div>
+                  <!-- /se connecter -->
+                  <!-- Se connecter -->
+                  <div>
+                    <a href="{% url 'account_signup' %}" style="color:black">
+                      <i class="fas fa-user-plus"></i>
+                      <span>s'inscrire</span>
+                    </a>
+                  </div>
+                  <!-- /se connecter -->
+                  {% comment %}
+                  <div>
+                    <a class="nav-link waves-effect" href="{% url 'account_login' %}">
+                      <span class="clearfix d-none d-sm-inline-block" style="color:black"> Se connecter</span>
+                    </a>
+                  </div>
+                  <div>
+                    <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
+                      <span class="clearfix d-none d-sm-inline-block" style="color:black"> S'inscrire </span>
+                    </a>
+                  </div>
+                  {% endcomment %}
+                  {% endif %}
+                </div>
+                <!-- row -->
               </div>
-              <!-- /se connecter -->
-              {% comment %}
-              <div>
-                <a class="nav-link waves-effect" href="{% url 'account_login' %}">
-                  <span class="clearfix d-none d-sm-inline-block" style="color:black"> Se connecter</span>
-                </a>
-              </div>
-              <div>
-                <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
-                  <span class="clearfix d-none d-sm-inline-block" style="color:black"> S'inscrire </span>
-                </a>
-              </div>
-              {% endcomment %}
-              {% endif %}
+              <!-- container -->
             </div>
-            <!-- row -->
           </div>
-          <!-- container -->
         </div>
-      </div>
-    </div>
-    <!-- /MAIN HEADER -->
+        <!-- /MAIN HEADER -->
   </header>
   <!-- /HEADER -->

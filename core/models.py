@@ -12,6 +12,12 @@ CATEGORY_CHOICES = (
     ('OW', 'Outwear')
 )
 
+INFO_CHOICES = (
+    ('N', 'Nouveauté'),
+    ('QL', 'Quantité limitée'),
+    ('ND', 'Non disponible')
+)
+
 LABEL_CHOICES = (
     ('P', 'primary'),
     ('S', 'secondary'),
@@ -32,14 +38,14 @@ MEMBERSHIPS_CHOICES = (
 
 class UserProfile(models.Model):
     user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+        settings.AUTH_USER_MODEL, related_name="userprofile", on_delete=models.CASCADE)
     stripe_customer_id = models.CharField(max_length=50, blank=True, null=True)
     one_click_purchasing = models.BooleanField(default=False)
     memberships = models.CharField(
         choices=MEMBERSHIPS_CHOICES, max_length=1, default='N')
     # wallet = models.IntegerField(blank=True, null=True)
-    wallet = models.IntegerField(blank=False, null=True, default=10000)
-    current_wallet = models.IntegerField(blank=True, null=True)
+    wallet = models.PositiveIntegerField(blank=False, null=True, default=10000)
+    current_wallet = models.PositiveIntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.user.username
@@ -59,10 +65,13 @@ class Item(models.Model):
     price = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
+    info = models.CharField(choices=INFO_CHOICES,
+                            max_length=2, blank=True, null=True)
     label = models.CharField(choices=LABEL_CHOICES, max_length=1)
     slug = models.SlugField()
     description = models.TextField()
     image = models.ImageField()
+    stock = models.IntegerField(default=0, blank=True, null=True)
     points = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
