@@ -2454,6 +2454,7 @@ textarea.input {
 .header-ctn {
   float: right;
   padding: 15px 0px;
+  margin-top: 15px;
 }
 
 .header-ctn>div {
