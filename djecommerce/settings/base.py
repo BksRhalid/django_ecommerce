@@ -1,6 +1,8 @@
 import os
 from decouple import config
 import dj_database_url
+import django_heroku
+
 
 DEBUG = config('DEBUG', cast=bool)
 
@@ -92,3 +94,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
