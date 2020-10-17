@@ -3,7 +3,9 @@ import dj_database_url
 
 
 DEBUG = False
-ALLOWED_HOSTS = ['soldorak.herokuapp.com']
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['soldorak.herokuapp.com']
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
