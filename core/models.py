@@ -30,9 +30,9 @@ ADDRESS_CHOICES = (
 )
 
 MEMBERSHIPS_CHOICES = (
-    ('P', 'premium'),
-    ('S', 'saver'),
-    ('N', 'none')
+    ('P', 'Premium'),
+    ('S', 'Saver'),
+    ('F', 'Free')
 )
 
 
