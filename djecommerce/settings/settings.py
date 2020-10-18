@@ -1,7 +1,7 @@
 import os
 from decouple import config
 import dj_database_url
-import django_heroku
+# import django_heroku
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -153,8 +153,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Production
 
-Activate Django-Heroku.
-django_heroku.settings(locals())
+# Activate Django-Heroku.
+# django_heroku.settings(locals())
 
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
