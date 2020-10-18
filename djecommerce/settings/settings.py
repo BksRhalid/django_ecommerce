@@ -21,7 +21,7 @@ SECRET_KEY = 'snzh3$0g@-=ck&6p)3mia83%hqq)ak^0^q_w^^39+!kbw4q6jx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1']
+# ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -144,8 +144,8 @@ STRIPE_SECRET_KEY = config('STRIPE_TEST_SECRET_KEY')
 # Activate Django-Heroku.
 # django_heroku.settings(locals())
 
-#ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['soldorak.herokuapp.com']
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['soldorak.herokuapp.com']
 
 
 # DATABASES = {
