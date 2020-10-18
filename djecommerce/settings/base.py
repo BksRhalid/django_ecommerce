@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import os
 from decouple import config
 import dj_database_url
@@ -97,3 +98,4 @@ DATABASES = {
 
 # Activate Django-Heroku.
 # django_heroku.settings(locals())
+=======
