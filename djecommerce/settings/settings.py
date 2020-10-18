@@ -8,16 +8,16 @@ import dj_database_url
 if os.environ.get('ENV') == 'PRODUCTION':
     DEBUG = False
     SECRET_KEY = config('SECRET_KEY')
-    # DATABASES = {
-    #     'default': {
-    #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #         'NAME': config('DB_NAME'),
-    #         'USER': config('DB_USER'),
-    #         'PASSWORD': config('DB_PASSWORD'),
-    #         'HOST': config('DB_HOST'),
-    #         'PORT': ''
-    #     }
-    # }
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': config('DB_NAME'),
+            'USER': config('DB_USER'),
+            'PASSWORD': config('DB_PASSWORD'),
+            'HOST': config('DB_HOST'),
+            'PORT': ''
+        }
+    }
     db_from_env = dj_database_url.config(conn_max_age=500)
     DATABASES['default'].update(db_from_env)
 
