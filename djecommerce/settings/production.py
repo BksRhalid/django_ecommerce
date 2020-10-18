@@ -1,8 +1,6 @@
 # from .base import *
 # import dj_database_url
 
-SECRET_KEY = 'snzh3$0g@-=ck&6p)3mia83%hqq)ak^0^q_w^^39+!kbw4q6jx'
-
 # DEBUG = False
 # ALLOWED_HOSTS = ['*']
 # # ALLOWED_HOSTS = ['soldorak.herokuapp.com']

@@ -3,11 +3,18 @@ from decouple import config
 import dj_database_url
 # import django_heroku
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))
+
+SECRET_KEY = 'snzh3$0g@-=ck&6p)3mia83%hqq)ak^0^q_w^^39+!kbw4q6jx'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get('ENV') == 'PRODUCTION':
     DEBUG = False
-    SECRET_KEY = config('SECRET_KEY')
+    # SECRET_KEY = config('SECRET_KEY')
+    SECRET_KEY = 'snzh3$0g@-=ck&6p)3mia83%hqq)ak^0^q_w^^39+!kbw4q6jx'
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -40,10 +47,6 @@ else:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = os.path.dirname(os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__))))
 
 
 # Application definition
@@ -157,5 +160,4 @@ AUTH_PASSWORD_VALIDATORS = [
 # django_heroku.settings(locals())
 
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
