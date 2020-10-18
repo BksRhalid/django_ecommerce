@@ -138,7 +138,7 @@ STRIPE_SECRET_KEY = config('STRIPE_TEST_SECRET_KEY')
 # django_heroku.settings(locals())
 
 #ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = ['soldorak.herokuapp.com']
+ALLOWED_HOSTS = ['soldorak.herokuapp.com']
 
 
 # DATABASES = {
@@ -155,6 +155,6 @@ STRIPE_SECRET_KEY = config('STRIPE_TEST_SECRET_KEY')
 #STRIPE_PUBLIC_KEY = config('STRIPE_LIVE_PUBLIC_KEY')
 #STRIPE_SECRET_KEY = config('STRIPE_LIVE_SECRET_KEY')
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# db_from_env = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(db_from_env)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
