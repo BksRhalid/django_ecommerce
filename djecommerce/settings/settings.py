@@ -1,27 +1,49 @@
 import os
 from decouple import config
 import dj_database_url
-# import django_heroku
+import django_heroku
 
 
-# # SECURITY WARNING: don't run with debug turned on in production!
-# if os.environ.get('ENV') == 'PRODUCTION':
-#     DEBUG = False
-# else:
-#     DEBUG = True
+# SECURITY WARNING: don't run with debug turned on in production!
+if os.environ.get('ENV') == 'PRODUCTION':
+    DEBUG = False
+    SECRET_KEY = config('SECRET_KEY')
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #         'NAME': config('DB_NAME'),
+    #         'USER': config('DB_USER'),
+    #         'PASSWORD': config('DB_PASSWORD'),
+    #         'HOST': config('DB_HOST'),
+    #         'PORT': ''
+    #     }
+    # }
+    db_from_env = dj_database_url.config(conn_max_age=500)
+    DATABASES['default'].update(db_from_env)
+
+# ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['soldorak.herokuapp.com']
+    STRIPE_PUBLIC_KEY = config('STRIPE_LIVE_PUBLIC_KEY')
+    STRIPE_SECRET_KEY = config('STRIPE_LIVE_SECRET_KEY')
+
+else:
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = True
+    ALLOWED_HOSTS = ['127.0.0.1']
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = 'snzh3$0g@-=ck&6p)3mia83%hqq)ak^0^q_w^^39+!kbw4q6jx'
+    STRIPE_PUBLIC_KEY = config('STRIPE_TEST_PUBLIC_KEY')
+    STRIPE_SECRET_KEY = config('STRIPE_TEST_SECRET_KEY')
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'snzh3$0g@-=ck&6p)3mia83%hqq)ak^0^q_w^^39+!kbw4q6jx'
-#SECRET_KEY = config('SECRET_KEY')
-
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -92,9 +114,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
 
 # Static files settings
@@ -120,12 +142,6 @@ LOGIN_REDIRECT_URL = '/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -135,33 +151,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-STRIPE_PUBLIC_KEY = config('STRIPE_TEST_PUBLIC_KEY')
-STRIPE_SECRET_KEY = config('STRIPE_TEST_SECRET_KEY')
-
-
 # Production
 
-# Activate Django-Heroku.
-# django_heroku.settings(locals())
-
-ALLOWED_HOSTS = ['*']
-# ALLOWED_HOSTS = ['soldorak.herokuapp.com']
+Activate Django-Heroku.
+django_heroku.settings(locals())
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': config('DB_NAME'),
-#         'USER': config('DB_USER'),
-#         'PASSWORD': config('DB_PASSWORD'),
-#         'HOST': config('DB_HOST'),
-#         'PORT': ''
-#     }
-# }
-
-#STRIPE_PUBLIC_KEY = config('STRIPE_LIVE_PUBLIC_KEY')
-#STRIPE_SECRET_KEY = config('STRIPE_LIVE_SECRET_KEY')
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
