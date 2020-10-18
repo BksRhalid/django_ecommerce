@@ -1,7 +1,7 @@
 import os
 from decouple import config
 import dj_database_url
-import django_heroku
+# import django_heroku
 
 
 DEBUG = config('DEBUG', cast=bool)
@@ -96,4 +96,4 @@ DATABASES = {
 }
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
