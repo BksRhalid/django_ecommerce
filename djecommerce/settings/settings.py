@@ -3,6 +3,13 @@ from decouple import config
 import dj_database_url
 # import django_heroku
 
+
+# # SECURITY WARNING: don't run with debug turned on in production!
+# if os.environ.get('ENV') == 'PRODUCTION':
+#     DEBUG = False
+# else:
+#     DEBUG = True
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
