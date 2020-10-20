@@ -2,8 +2,8 @@ from .base import *
 import dj_database_url
 
 DEBUG = False
-ALLOWED_HOSTS = ['*', '127.0.0.1']
-# ALLOWED_HOSTS = ['soldorak.herokuapp.com']
+# ALLOWED_HOSTS = ['*', '127.0.0.1']
+ALLOWED_HOSTS = ['soldorak.herokuapp.com']
 
 
 AUTH_PASSWORD_VALIDATORS = [
