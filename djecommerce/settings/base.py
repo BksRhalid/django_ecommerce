@@ -1,7 +1,5 @@
 import os
 from decouple import config
-import dj_database_url
-# import django_heroku
 
 
 DEBUG = config('DEBUG', cast=bool)
@@ -38,7 +36,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'djecommerce.urls'
@@ -94,6 +92,3 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-
-# Activate Django-Heroku.
-# django_heroku.settings(locals())
