@@ -4,7 +4,11 @@ import sys
 
 if __name__ == '__main__':
     os.environ.setdefault('DJANGO_SETTINGS_MODULE',
+<<<<<<< HEAD
                           'djecommerce.settings.production')
+=======
+                          'djecommerce.settings.production')  # djecommerce.settings.development
+>>>>>>> f43a2d3e56d0dbbb07290cc65dd55356ba155901
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

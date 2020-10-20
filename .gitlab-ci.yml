@@ -1,0 +1,141 @@
+#This file is a template, and might need editing before it works on your project.
+# Official framework image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/python
+image: python:latest
+
+# Pick zero or more services to be used on all builds.
+# Only needed when using a docker container to run your tests in.
+# Check out: http://docs.gitlab.com/ce/ci/docker/using_docker_images.html#what-is-a-service
+services:
+  - mysql:latest
+  - postgres:latest
+
+variables:
+  POSTGRES_DB: database_name
+
+# This folder is cached between builds
+# http://docs.gitlab.com/ce/ci/yaml/README.html#cache
+cache:
+  paths:
+    - ~/.cache/pip/
+
+# This is a basic example for a gem or script which doesn't use
+# services such as redis or postgres
+before_script:
+  - python -V  # Print out python version for debugging
+  # Uncomment next line if your Django app needs a JS runtime:
+  # - apt-get update -q && apt-get install nodejs -yqq
+  - pip install -r requirements.txt
+
+# To get Django tests to work you may need to create a settings file using
+# the following DATABASES:
+#
+# DATABASES = {
+#     'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'ci',
+#        'USER': 'postgres',
+#        'PASSWORD': 'postgres',
+#        'HOST': 'postgres',
+#        'PORT': '5432',
+#    },
+# }
+#
+# and then adding `--settings app.settings.ci` (or similar) to the test command
+
+test:
+  variables:
+    DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
+  script:
+    - python manage.py test
+
+
+
+# stages:
+#   - build
+#   - test
+#   - deploy
+
+# variables:
+#   COMMIT_SHA: $CI_COMMIT_SHORT_SHA
+#   COMMIT_BRANCH: $CI_COMMIT_REF_SLUG
+
+# build web app:
+#   stage: build
+#   image: node:alpine
+#   script:
+#     - apk add --no-cache python make g++
+#     - pip install -r requirements.txt
+#     - docker-compose build
+#     - docker-compose up -d
+#   only:
+#     - master
+#   artifacts:
+#     paths:
+#       - dist/
+
+# upload web app:
+#   stage: deploy
+#   image: alpine
+#   dependencies:
+#     - build web app
+#   variables:
+#     GIT_STRATEGY: none
+#   before_script:
+#     - apk add lftp
+#   script:
+#     - lftp -e "mirror -R dist www" -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST
+#   only:
+#     refs:
+#       - master
+#       # - develop
+
+
+####### DJANGO #######
+
+stages:
+  - test
+  - deploy
+
+test:
+  stage: test
+  script:
+    # this configures Django application to use attached postgres database that is run on `postgres` host
+    - export DATABASE_URL=postgres://postgres:@postgres:5432/python-test-app
+    - apt-get update -qy
+    - apt-get install -y python-dev python-pip
+    - pip install -r requirements.txt
+    - python manage.py test
+
+# staging:
+#   stage: deploy
+#   script:
+#     - apt-get update -qy
+#     - apt-get install -y ruby-dev
+#     - gem install dpl
+#     - dpl --provider=heroku --app=gitlab-ci-python-test-staging --api-key=$HEROKU_STAGING_API_KEY
+#   only:
+#     - master
+
+# production:
+#   stage: deploy
+#   script:
+#     - apt-get update -qy
+#     - apt-get install -y ruby-dev
+#     - gem install dpl
+#     - dpl --provider=heroku --app=gitlab-ci-python-test-prod --api-key=$HEROKU_PRODUCTION_API_KEY
+#   only:
+#     - tags
+
+staging:
+    stage: deploy
+    before_script:
+      - apt-get update -qy
+      - apt-get install -y lftp
+    script:
+      # - lftp -e "mirror -R dist www" -u $FTP_USERNAME,$FTP_PASSWORD $FTP_HOST
+      - lftp -e "open $FTP_HOST; user $FTP_USERNAME $FTP_PASSWORD; mirror -X .* -X .*/ --reverse --verbose --delete ./ www/; bye"
+    only:
+      refs:
+        - master
+        # - develop

@@ -1,64 +1,227 @@
 {% load cart_template_tags %}
+{% load static %}
 
+
+{% comment %}
 <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+  <div class="container">
+    <!-- container -->
     <div class="container">
-
-      <!-- Brand -->
-      <a class="navbar-brand waves-effect" href="/">
-        <strong class="blue-text">DJe-commerce</strong>
-      </a>
-
-      <!-- Collapse -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <!-- Links -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-        <!-- Left -->
-        <ul class="navbar-nav mr-auto">
-          {% comment %} <li class="nav-item active">
-            <a class="nav-link waves-effect" href="/">Home
-              <span class="sr-only">(current)</span>
+      <!-- row -->
+      <div class="row">
+        <!-- LOGO -->
+        <div class="col-md-3">
+          <div class="header-logo">
+            <a href="/" class="logo">
+              <img src="{% static 'img/base/red_logo_VL.png'%}" alt="">
             </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link waves-effect" href="/checkout">
-            Checkout</a>
-          </li> {% endcomment %}
-        </ul>
-
-        <!-- Right -->
-        <ul class="navbar-nav nav-flex-icons">
-          {% if request.user.is_authenticated %}
-          <li class="nav-item">
-            <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">
-              <span class="badge red z-depth-1 mr-1"> {{ request.user|cart_item_count }} </span>
-              <i class="fas fa-shopping-cart"></i>
-              <span class="clearfix d-none d-sm-inline-block"> Cart </span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
-              <span class="clearfix d-none d-sm-inline-block"> Logout </span>
-            </a>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link waves-effect" href="{% url 'account_login' %}">
-              <span class="clearfix d-none d-sm-inline-block"> Login </span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
-              <span class="clearfix d-none d-sm-inline-block"> Signup </span>
-            </a>
-          </li>
-          {% endif %}
-        </ul>
+          </div>
+        </div>
+        <!-- /LOGO -->
       </div>
+    </div>
+
+    <!-- /HEADER -->
+
+    <!-- Collapse -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- Left mis en commentaire -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link waves-effect" href="/">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="/checkout">
+            Checkout</a>
+        </li>
+      </ul>
+
+      <!-- Right -->
+
+      <ul class="navbar-nav nav-flex-icons">
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">
+            <span class="badge red z-depth-1 mr-1"> {{ request.user|cart_item_count }} </span>
+            <i class="fas fa-shopping-cart"></i>
+            <span class="clearfix d-none d-sm-inline-block"> Vos livraisons </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
+            <span class="clearfix d-none d-sm-inline-block"> Déconnexion </span>
+          </a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'account_login' %}">
+            <span class="clearfix d-none d-sm-inline-block"> Se connecter</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
+            <span class="clearfix d-none d-sm-inline-block"> S'inscrire </span>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
 
     </div>
-  </nav>
+
+  </div>
+</nav>
+{% endcomment %}
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TTV8HP2" height="0" width="0"
+    style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+{% comment %}
+<script>
+  (function (t, e, s, o) {
+    var n, a, c; t.SMCX = t.SMCX || [], e.getElementById(o) || (n = e.getElementsByTagName(s), a = n[n.length - 1], c = e.createElement(s), c.type = "text/javascript", c.async = !0, c.id = o, c.src = ["https:" === location.protocol ? "https://" : "http://", "widget.surveymonkey.com/collect/website/js/tRaiETqnLgj758hTBazgdwwFDKE7MxdPDrljSOtz34D2Q6uYdtZGDeKK8R_2BhcQxe.js"].join(""), a.parentNode.insertBefore(c, a))
+  }
+  )
+    (window, document, "script", "smcx-sdk");
+</script>
+{% endcomment %}
+
+<div class="site-wrap" id="home-section">
+  <div class="site-mobile-menu site-navbar-target">
+    <div class="site-mobile-menu-header">
+      <div class="site-mobile-menu-close mt-3">
+        <span class="icon-close2 js-menu-toggle"></span>
+      </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+  </div>
+
+  <!-- MAIN HEADER -->
+
+  <header class="fixed-top mb-4">
+    <div class="fixed-top navbar-expand-lg navbar-light white scrolling-navbar"
+      style="border-bottom: 1px solid rgba(0, 0, 0, 0.2) ">
+      <!-- container -->
+      <div class="container">
+        <!-- row -->
+        <div class="row">
+          <!-- LOGO -->
+          <div class="col-md-3 mt-2">
+            <div class="header-logo">
+              <a href="/" class="logo">
+                <img src="{% static 'img/base/red_logo_VL.png' %}" alt="">
+                {% if request.user.is_authenticated %}
+                <p style="color:black">Mon compte : {{request.user.userprofile.wallet}}</p>
+                {% endif %}
+              </a>
+            </div>
+          </div>
+          <!-- /LOGO -->
+          {% if request.user.is_authenticated %}
+          <!-- SEARCH BAR -->
+          <!-- Bouton pré-inscription -->
+          <div class="col-md-3 text-center">
+            <!-- <h5>
+              <strong>
+                <a href="/" class="dark-grey-text">valeur
+                  <span class="badge badge-pill primary-color">{{ request.user.user_profile.current_wallet }}</span>
+                </a>
+              </strong>
+            </h5> -->
+          </div>
+          <!-- /SEARCH BAR -->
+          <!-- ACCOUNT -->
+          <div class="col-md-6 clearfix">
+            <div class="header-ctn">
+              <!-- Wishlist -->
+              <div>
+                <a href="{% url 'core:order-summary' %}" style="color:black">
+                  <span>Vos crédits</span>
+                  <div class="badge badge-pill primary-color">{{ request.user.userprofile.current_wallet }}
+                    <img src="{% static 'img/base/flaticon_soldorak.ico' %}" alt="">
+                  </div>
+                </a>
+              </div>
+              <!-- /Wishlist -->
+              <!-- Wishlist -->
+              <div>
+                <a href="{% url 'core:order-summary' %}" style="color:black">
+                  <i class="fa fa-heart-o"></i>
+                  <span>Vos souhaits</span>
+                  <div class="qty">{{ request.user|cart_item_count }}</div>
+                </a>
+              </div>
+              <!-- /Wishlist -->
+
+              <!-- Cart -->
+              <div>
+                <a href="{% url 'core:order-summary' %}" style="color:black">
+                  <i class="fa fa-shopping-cart"></i>
+                  <span>Vos livraisons</span>
+                  <div class="qty">{{ request.user|cart_item_count }}</div>
+                </a>
+              </div>
+              <div>
+                <a href="{% url 'account_logout' %}" style="color:black">
+                  <i class="fas fa-sign-out-alt"></i>
+                  <span>Déconnexion</span>
+                </a>
+              </div>
+              <!-- /ACCOUNT -->
+              {% else %}
+              <!-- SEARCH BAR -->
+              <!-- Bouton pré-inscription -->
+              <div class="col-md-3 text-center">
+                <!-- <a href="https://soldorak.typeform.com/to/qDZpyX" class="btn btn-primary mr-2 mb-2">Pré-inscription</a> -->
+              </div>
+              <!-- /SEARCH BAR -->
+              <!-- ACCOUNT -->
+              <div class="col-md-6 clearfix">
+                <div class="header-ctn">
+                  <!-- Se connecter -->
+                  <div>
+                    <a href="{% url 'account_login' %}" style="color:black">
+                      <i class="fas fa-sign-in-alt"></i>
+                      <span>se connecter</span>
+                    </a>
+                  </div>
+                  <!-- /se connecter -->
+                  <!-- Se connecter -->
+                  <div>
+                    <a href="{% url 'account_signup' %}" style="color:black">
+                      <i class="fas fa-user-plus"></i>
+                      <span>s'inscrire</span>
+                    </a>
+                  </div>
+                  <!-- /se connecter -->
+                  {% comment %}
+                  <div>
+                    <a class="nav-link waves-effect" href="{% url 'account_login' %}">
+                      <span class="clearfix d-none d-sm-inline-block" style="color:black"> Se connecter</span>
+                    </a>
+                  </div>
+                  <div>
+                    <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
+                      <span class="clearfix d-none d-sm-inline-block" style="color:black"> S'inscrire </span>
+                    </a>
+                  </div>
+                  {% endcomment %}
+                  {% endif %}
+                </div>
+                <!-- row -->
+              </div>
+              <!-- container -->
+            </div>
+          </div>
+        </div>
+        <!-- /MAIN HEADER -->
+  </header>
+  <!-- /HEADER -->
