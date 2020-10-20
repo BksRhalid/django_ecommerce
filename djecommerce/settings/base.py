@@ -72,12 +72,12 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
 
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_in_env')]
 # STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
 
 # Extra places for collectstatic to find static files.
